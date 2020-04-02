@@ -122,7 +122,9 @@ Class Sqlite extends \SQLite3 {
         $res = $this->exec( $query );
         if ( !$res ){
             throw new Exception( $this->lastErrorMsg() );
-        }
+        }else{
+			return true;
+		}
     }
 
     /**
@@ -181,7 +183,7 @@ Class Sqlite extends \SQLite3 {
     /**
      * Get last inserted id of the last query
      */
-    function insertId(){
+    function lastid(){
         return $this->lastInsertRowID();
 	}
 	
@@ -221,7 +223,7 @@ Class Sqlite extends \SQLite3 {
         
         $sql .= $fields .' VALUES '. $values;
 
-        $query = $this->execute( $sql );
+		$query = $this->execute( $sql );
         
         if(!$query){
             return false;

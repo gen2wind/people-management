@@ -31,39 +31,8 @@ if(DB_DRIVER =='mysql'){
 							address text NOT NULL,
 							phone text NOT NULL
 						);";
-		$db->exec($createTable);
+		$db->execute($createTable);
 	}
-
-	/* $data = [
-		'first_name'=>'titi',
-		'last_name'=>'dele',
-		'dob'=>'2018-09-02',
-		'phone'=>'9567890',
-		'address'=>'jkahjkghjgjkh',
-	];
-	$db->insert( 'people', $data ); */
-
-	/* $data = [
-		'first_name'=>'titi',
-		'last_name'=>'wale',
-		'dob'=>'2018-09-02',
-		'phone'=>'9567890',
-		'address'=>'jkahjkghjgjkh',
-	];
-	$where = array( 'id' => 2 );
-	$submit = $db->update( 'people', $data , $where, 1 ); */
-
-	
-	$where = array( 'id' => 2 );
-	$submit = $db->delete( 'people', $where, 1 );
-	
-	$sql = "SELECT * FROM `people` WHERE `id` = 1 ";
-	$data = $db->fetchOneRow($sql);
-
-	$sql = "SELECT * FROM `people` ";
-	$data = $db->fetchAllRows($sql);
-	echo "<pre>";
-	print_r($data);	
 }
 
 $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : '';
