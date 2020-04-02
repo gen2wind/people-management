@@ -15,7 +15,56 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once(__DIR__."/config.php");
-include_once(__DIR__."/DB.php");
+
+if(DB_DRIVER =='mysql'){
+	include_once(__DIR__."/DB.php");
+	$db = DB::getInstance();
+}else{
+	include_once(__DIR__."/Sqlite.php");
+	$db = Sqlite::getInstance(DB_FILE);
+	if(!$db->table_exists('people')){
+		$createTable = "CREATE TABLE IF NOT EXISTS people (
+							id INTEGER PRIMARY KEY AUTOINCREMENT,
+							first_name text NOT NULL,
+							last_name text NOT NULL,
+							dob text NOT NULL,
+							address text NOT NULL,
+							phone text NOT NULL
+						);";
+		$db->exec($createTable);
+	}
+
+	/* $data = [
+		'first_name'=>'titi',
+		'last_name'=>'dele',
+		'dob'=>'2018-09-02',
+		'phone'=>'9567890',
+		'address'=>'jkahjkghjgjkh',
+	];
+	$db->insert( 'people', $data ); */
+
+	/* $data = [
+		'first_name'=>'titi',
+		'last_name'=>'wale',
+		'dob'=>'2018-09-02',
+		'phone'=>'9567890',
+		'address'=>'jkahjkghjgjkh',
+	];
+	$where = array( 'id' => 2 );
+	$submit = $db->update( 'people', $data , $where, 1 ); */
+
+	
+	$where = array( 'id' => 2 );
+	$submit = $db->delete( 'people', $where, 1 );
+	
+	$sql = "SELECT * FROM `people` WHERE `id` = 1 ";
+	$data = $db->fetchOneRow($sql);
+
+	$sql = "SELECT * FROM `people` ";
+	$data = $db->fetchAllRows($sql);
+	echo "<pre>";
+	print_r($data);	
+}
 
 $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : '';
 
@@ -24,8 +73,6 @@ $json = array('key'=>0,'txt'=>'Error No Data');
 // Put all the values into variable
 extract($_REQUEST);
 extract($_FILES);
-
-$db = DB::getInstance();
 
 function calAge($dob){
   $birthDate = date("m/d/Y",strtotime($dob));
