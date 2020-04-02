@@ -28,7 +28,6 @@ class App extends Component {
           </ul>
         </div>
       </nav> <br/>
-      <h2>List of the People</h2> <br/>
       <Switch>
           <Route exact path='/' component={ List } />
           <Route exact path='/add' component={ Add } />
