@@ -3,28 +3,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import {CONFIG} from '../constants';
-import axios from 'axios';
-
 
 class TableRow extends Component {
-  delete = () =>{
-    axios({
-      method: 'get',
-      url: CONFIG.APP_ENDPOINT + "?type=delete_person&user_id="+this.props.obj.id,
-      }).then((res)=>{
-          console.log(res);
-          if(res.data.key===1){ 
-              // Show messge of delete successfully
-          }else{                    
-              // Show messge of delete not successful
-          }
-          
-          alert(res.data.txt)
-      }).catch(function (error) {
-          console.log(error);
-      })
-  }
 
   render() {
     return (
@@ -42,10 +22,13 @@ class TableRow extends Component {
             {this.props.obj.phone}
           </td>
           <td>
-            <Link to={"/edit/"+this.props.obj.id} className="btn btn-primary">Edit</Link>
+            { this.props.isEdit ?
+              <button onClick={()=> this.props.showModal('edit',this.props.rowKey)} className="btn btn-primary">Edit</button>:
+              <Link to={"/edit/"+this.props.obj.id} className="btn btn-primary">Edit</Link>
+            }
           </td>
           <td>
-            <button onClick={this.delete} className="btn btn-danger">Delete</button>
+              <button onClick={()=> this.props.deletePerson(this.props.rowKey)} className="btn btn-danger">Delete</button>
           </td>
         </tr>
     );

@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 
 import {CONFIG} from '../constants';
+import {handleDate} from '../helpers/helper';
 
 export default class Add extends Component {
     constructor(props) {
@@ -44,24 +45,14 @@ export default class Add extends Component {
 
 
     handleDob = (date) =>{
-        let d = new Date(date);
-        let year = d.getFullYear();
-        let month = d.getMonth()+1;
-        let dt = d.getDate();
-
-        if (dt < 10) {
-            dt = '0' + dt;
-        }
-        if (month < 10) {
-            month = '0' + month;
-        }
+        let d = handleDate(date)
         this.setState({
-            rawDate: date,
-            dob: year+'-' + month + '-'+dt
+            rawDate: d.rawDate,
+            dob: d.date
         })
     }
 
-    handleFirstName = (e) =>{
+    /* handleFirstName = (e) =>{
         this.setState({
             first_name: e.target.value,
         })
@@ -82,6 +73,12 @@ export default class Add extends Component {
     handleAddress = (e) =>{
         this.setState({
             address: e.target.value,
+        })
+    } */
+
+    handleInput = (e) =>{
+        this.setState({
+            [e.target.name]: e.target.value,
         })
     }
 
@@ -125,13 +122,13 @@ export default class Add extends Component {
                     <div className='col-md-6'>
                         <div className="form-group">
                             <label>First Name:  </label>
-                            <input type="text" value={this.state.first_name} onChange={this.handleFirstName}  className="form-control" />
+                            <input name='first_name' type="text" value={this.state.first_name} onChange={this.handleInput}  className="form-control" />
                         </div>
                     </div>
                     <div className='col-md-6'>
                         <div className="form-group">
                             <label>Last Name: </label>
-                            <input type="text" value={this.state.last_name} onChange={this.handleLastName} className="form-control"/>
+                            <input name='last_name' type="text" value={this.state.last_name} onChange={this.handleInput} className="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -139,7 +136,7 @@ export default class Add extends Component {
                     <div className='col-md-6'>
                         <div className="form-group">
                             <label>Phone: </label>
-                            <input type="text" value={this.state.phone} onChange={this.handlePhone} className="form-control"/>
+                            <input name='phone' type="text" value={this.state.phone} onChange={this.handleInput} className="form-control"/>
                         </div>
                     </div>
                     <div className='col-md-6'>
@@ -154,12 +151,12 @@ export default class Add extends Component {
                     <div className='col-md-12'>
                         <div className="form-group">
                             <label>Address: </label>
-                            <textarea type="text" value={this.state.address} onChange={this.handleAddress}  className="form-control"/>
+                            <textarea name='address' type="text" value={this.state.address} onChange={this.handleInput}  className="form-control"/>
                         </div>
                     </div>
                 </div>
                 <div className="form-group">
-                    <input type="submit" value="Add Person" className="btn btn-primary"/>
+                    <input type="submit" value="Save Person" className="btn btn-primary"/>
                 </div>
             </form>
         </div>

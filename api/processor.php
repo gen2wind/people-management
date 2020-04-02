@@ -46,9 +46,11 @@ if (trim($type) === 'add_person') {
 		$json = array('key' => 0, 'txt' => 'Last Name cannot be empty');
 	} else if (empty($dob)) {
 		$json = array('key' => 0, 'txt' => 'Please Select Date of Birth');
-	} else if (calAge($dob) <= 14 || calAge($dob) >= 25) {
+	}
+	/* else if (calAge($dob) <= 14 || calAge($dob) >= 25) {
 		$json = array('key' => 0, 'txt' => 'Age must be above 14 and below 25');
-	} else if (empty($phone)) {
+	} */ 
+	else if (empty($phone)) {
 		$json = array('key' => 0, 'txt' => 'Phone number cannot be empty');
 	} else if (empty($address)) {
 		$json = array('key' => 0, 'txt' => 'Address Cannot be empty');
@@ -62,7 +64,7 @@ if (trim($type) === 'add_person') {
 		];
 		$submit = $db->insert( 'people', $data );
 		if($submit){			
-			$json = array('key' => 1, 'txt' => 'A person has been added to the list of people');
+			$json = array('key' => 1, 'txt' => 'A person has been added to the list of people','newId'=>$db->lastid());
 		}else{
 			$json = array('key' => 0, 'txt' => 'Unable to add person details at the moment');
 		}
@@ -80,9 +82,11 @@ if (trim($type) === 'edit_person') {
 		$json = array('key' => 0, 'txt' => 'Last Name cannot be empty');
 	} else if (empty($dob)) {
 		$json = array('key' => 0, 'txt' => 'Please Select Date of Birth');
-	} else if (calAge($dob) <= 14 || calAge($dob) >= 25) {
+	}
+	/* else if (calAge($dob) <= 14 || calAge($dob) >= 25) {
 		$json = array('key' => 0, 'txt' => 'Age must be above 14 and below 25');
-	} else if (empty($phone)) {
+	} */ 
+	else if (empty($phone)) {
 		$json = array('key' => 0, 'txt' => 'Phone number cannot be empty');
 	} else if (empty($address)) {
 		$json = array('key' => 0, 'txt' => 'Address Cannot be empty');
