@@ -12,7 +12,7 @@ if(DB_DRIVER == 'mysql'){
     define( 'APP_ENV', 'production' ); //production/development
     define( 'DISPLAY_DEBUG', true ); //display db errors?
 }else if(DB_DRIVER == 'sqlite'){
-    $dbFile = __DIR__.'/sqlite.db';
+    $dbFile =dirname( __DIR__).'/db/sqlite.db';
     if(!file_exists($dbFile)){
         touch($dbFile);
     }

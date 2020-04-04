@@ -15,8 +15,11 @@ class App extends Component {
     return (
     <Router>
     <div className="container">
+    <header className="App-header">
+      {/* <img src={logo} className="App-logo" alt="logo" /> */}
+      <Link to={'/'} className="navbar-brand"><h1 className="App-title">People Management System</h1></Link>
+    </header>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link to={'/'} className="navbar-brand">People Management System</Link>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">

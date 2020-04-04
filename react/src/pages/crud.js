@@ -8,6 +8,7 @@ import {CONFIG} from '../constants';
 import { Modal } from 'react-bootstrap'
 import {handleDate} from '../helpers/helper';
 import DatePicker from "react-datepicker";
+import swal from 'sweetalert';
 
 
 
@@ -68,7 +69,35 @@ export default class Crud extends Component {
     }
 
     delete = (rowKey) =>{
-      const people = this.state.people;
+      swal({
+        title: "Are you sure?",
+        text: "Are you sure that you want to leave this page?",
+        icon: "warning",
+        dangerMode: true,
+      }).then(willDelete => {
+        if (willDelete) {
+          const people = this.state.people;
+          const person = people[rowKey];
+          axios({
+            method: 'get',
+            url: CONFIG.APP_ENDPOINT + "?type=delete_person&user_id="+person.id,
+            }).then((res)=>{
+                console.log(res);
+                if(res.data.key===1){ 
+                  const people = this.state.people.filter(p => p.id !== person.id);
+                  this.setState({
+                    people:people
+                  })
+                  swal("Success", res.data.txt, "success");
+              }else{                    
+                swal("Error", res.data.txt, "error");
+              }
+            }).catch(function (error) {
+                console.log(error);
+            })
+        }
+      });
+      /* const people = this.state.people;
       const person = people[rowKey];
       axios({
         method: 'get',
@@ -80,15 +109,15 @@ export default class Crud extends Component {
               this.setState({
                 people:people
               })
-                // Show messge of delete successfully
-            }else{                    
-                // Show messge of delete not successful
-            }
+              swal("Success: ", res.data.txt, "success");
+          }else{                    
+            swal("Error: ", res.data.txt, "error");
+          }
             
             alert(res.data.txt)
         }).catch(function (error) {
             console.log(error);
-        })
+        }) */
     }
 
       
@@ -145,8 +174,10 @@ export default class Crud extends Component {
                 rawDate: new Date(),
                 showModal:false,
             })
+            swal("Success: ", res.data.txt, "success");
+        }else{                    
+          swal("Error: ", res.data.txt, "error");
         }
-        alert(res.data.txt)
     });
   }
 
@@ -199,7 +230,7 @@ export default class Crud extends Component {
         <div>
           <h3 align="center">List of People</h3>
           <div className='float-right' style={{padding:'10px'}}>
-            <button onClick={() => this.showModal('add')} className="btn btn-primary">Create</button>
+            <button onClick={() => this.showModal('add')} className="btn btn-primary round-button">+</button>
           </div>
           <table className="table table-striped" style={{ marginTop: 20 }}>
             <thead>

@@ -14,13 +14,13 @@ header("Access-Control-Allow-Methods: GET,POST, OPTION");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once(__DIR__."/config.php");
+include_once(__DIR__."/inc/config.php");
 
 if(DB_DRIVER =='mysql'){
-	include_once(__DIR__."/DB.php");
+	include_once(__DIR__."/inc/DB.php");
 	$db = DB::getInstance();
 }else{
-	include_once(__DIR__."/Sqlite.php");
+	include_once(__DIR__."/inc/Sqlite.php");
 	$db = Sqlite::getInstance(DB_FILE);
 	if(!$db->table_exists('people')){
 		$createTable = "CREATE TABLE IF NOT EXISTS people (

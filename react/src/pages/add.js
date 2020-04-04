@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import {CONFIG} from '../constants';
 import {handleDate} from '../helpers/helper';
+import swal from 'sweetalert';
 
 export default class Add extends Component {
     constructor(props) {
@@ -76,7 +77,6 @@ export default class Add extends Component {
     url: CONFIG.APP_ENDPOINT,
     data: params
     }).then((res)=>{
-        console.log(res);
         if(res.data.key===1){            
             this.setState({
                 first_name: '',
@@ -87,8 +87,10 @@ export default class Add extends Component {
                 rawDate: new Date(),
                 redirectToList: true
             })
+            swal("Success: ", res.data.txt, "success");
+        }else{
+            swal("Error: ", res.data.txt, "error");
         }
-        alert(res.data.txt)
     });
   }
 

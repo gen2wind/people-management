@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import {CONFIG} from '../constants';
 import {handleDate} from '../helpers/helper';
+import swal from 'sweetalert';
 
 export default class Add extends Component {
     constructor(props) {
@@ -104,8 +105,11 @@ export default class Add extends Component {
             this.setState({                
                 redirectToList: true
             })
+            
+            swal("Success: ", res.data.txt, "success");
+        }else{            
+            swal("Error: ", res.data.txt, "error");
         }
-        alert(res.data.txt)
     });
   }
 
