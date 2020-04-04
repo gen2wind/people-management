@@ -39,12 +39,13 @@ Open Terminal/Cmd and go to PHP-server-root-folder/people/react and enter "yarn 
 Inside the build folder do the following
 - copy the api folder into the build folder
 - Add .htaccess into the build folder and add the below content into it
-- `Options -MultiViews
+
+`Options -MultiViews
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.html [QSA,L]`
 	
-- Then put everything inside the build folder into the server,
+Then put everything inside the build folder into the server,
 
 ### That is it
 
