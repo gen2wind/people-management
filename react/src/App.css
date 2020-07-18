@@ -1,10 +1,9 @@
 body{
   background-color: #cecece;
 }
-.container{
-  background-color: #ffffff;
-  min-height: 100vh;
-  padding:0!important;
+.wrapper{
+  min-height: 75vh;
+  width:95%!important;
 }
 
 .App {
@@ -43,7 +42,6 @@ body{
 }
 
 a.nav-link{
-  color: #007bff!important;
   text-decoration: none;
   background-color: transparent;
 }

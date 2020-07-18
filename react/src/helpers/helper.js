@@ -15,3 +15,12 @@ export const handleDate = (date) =>{
         date: year+'-' + month + '-'+dt
     };
 }
+
+
+
+export const copyrightDate = () =>{
+    let d = new Date();
+    let y = d.getFullYear();
+    let date = y=='2020' ? '2020' : '2020 - ' + y;
+    return {copyrightDate:date};
+}

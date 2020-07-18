@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
+import Footer from './components/footer';
 
 
 import List from './pages/list';
@@ -14,23 +15,30 @@ class App extends Component {
   render() {
     return (
     <Router>
-    <div className="container">
-    <header className="App-header">
-      {/* <img src={logo} className="App-logo" alt="logo" /> */}
-      <Link to={'/'} className="navbar-brand"><h1 className="App-title">People Management System</h1></Link>
-    </header>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+      <button className="navbar-toggler sideMenuToggler" type="button">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <Link to={'/'} className="navbar-brand"><h4 className="App-title">People Management System</h4></Link>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+    
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-                <Link to={'/'} className="nav-link">Home</Link>
+                <Link to={'/'} className="nav-link text-white">Home</Link>
               </li>
               <li className="nav-item">
-                <Link to={'/crud'} className="nav-link">One Page CRUD Operation</Link>
+                <Link to={'/crud'} className="nav-link text-white">One Page CRUD Operation</Link>
               </li>
           </ul>
-        </div>
-      </nav> <br/>
+      </div>
+    </nav>
+
+
+    <main>
+    <div className="wrapper p-5 my-4 mx-auto shadow rounded bg-white"> <br/>
       <Switch>
           <Route exact path='/' component={ List } />
           <Route exact path='/add' component={ Add } />
@@ -38,6 +46,8 @@ class App extends Component {
           <Route exact path='/crud' component={ Crud } />
       </Switch>
     </div>
+        <Footer />
+    </main>
     </Router>
     );
   }

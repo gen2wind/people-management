@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from "react-datepicker";
-import { Redirect } from 'react-router-dom';
+import { Redirect,Link } from 'react-router-dom';
  
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
@@ -101,6 +101,11 @@ export default class Add extends Component {
         }
         return (
             <div style={{marginTop: 10}}>
+
+            <div className="col-lg-12">
+                <Link to={'/'} className="btn btn-primary rounded-pill float-right">Back to list</Link>
+            </div>
+
             <h3>Add a Person</h3>
             <form onSubmit={this.onSubmit}>
                 <div className='row'>
